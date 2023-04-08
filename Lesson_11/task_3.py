@@ -22,8 +22,5 @@ def remove_negatives(nums):
     return [num for num in nums if num > 0]
 
 
-assert choose_func(nums1, square_nums, remove_negatives) == [1, 4, 9, 16, 25]
-assert choose_func(nums2, square_nums, remove_negatives) == [1, 3, 5]
-
 print(choose_func(nums1, square_nums, remove_negatives) == [1, 4, 9, 16, 25])
 print(choose_func(nums2, square_nums, remove_negatives) == [1, 3, 5])

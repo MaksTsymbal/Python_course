@@ -18,9 +18,12 @@
 #         writer.writerow(row)
 
 # без використання "import csv"
-with open('titanic_data.csv', 'r') as input_file, open('titanic_data_2.csv', 'w') as output_file:
-    output_lines = map(lambda line: ','.join(line.split(',')[0:1] + line.split(',')[2:]), input_file.readlines())
+def remove_column(line):
+    fields = line.split(',')
+    return ','.join(fields[0:1] + fields[2:])
 
+with open('titanic_data.csv', 'r') as input_file, open('titanic_data_2.csv', 'w') as output_file:
+    output_lines = map(remove_column, input_file.readlines())
     output_file.writelines(output_lines)
 
 
