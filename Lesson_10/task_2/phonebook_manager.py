@@ -6,20 +6,8 @@ class PhonebookManager:
     def __init__(self, data):
         self.data = data
 
-    def search_by_first_name(self, first_name):
-        return [entry for entry in self.data if entry["first_name"] == first_name]
-
-    def search_by_last_name(self, last_name):
-        return [entry for entry in self.data if entry["last_name"] == last_name]
-
-    def search_by_full_name(self, full_name):
-        return [entry for entry in self.data if f"{entry['first_name']} {entry['last_name']}" == full_name]
-
-    def search_by_phone_number(self, phone_number):
-        return [entry for entry in self.data if entry["phone_number"] == phone_number]
-
-    def search_by_city_or_state(self, city_or_state):
-        return [entry for entry in self.data if entry["city"] == city_or_state or entry["state"] == city_or_state]
+    def search(self, field, value):
+        return [entry for entry in self.data if entry[field] == value]
 
     def delete_entry_by_phone_number(self, phone_number):
         for entry in self.data:

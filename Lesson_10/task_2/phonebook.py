@@ -12,6 +12,9 @@ def dict_to_list(d):
     return list(d.values())
 
 class Phonebook:
+    GREETINGS = "Phonebook options:\n1. Add new entry\n2. Search entries\n3. Delete an entry\n4. Update an entry\n5. Exit"
+    SEARCHING = "Search entries:\n1. By first_name\n2. By last_name\n3. By full_name\n4. By phone_number\n5. By city or state"
+    FIELDS = list(('first_name', 'last_name', 'phone_number', 'city', 'state'))
     def __init__(self, name):
         self.name = name
         self.data = self.load_data()
@@ -35,35 +38,15 @@ class Phonebook:
         self.save_data()
 
     def search_entries(self):
-        print("Search entries:")
-        print("1. By first name")
-        print("2. By last name")
-        print("3. By full name")
-        print("4. By phone number")
-        print("5. By city or state")
-        choice = input("Enter your choice (1-5): ")
-        if choice == "1":
-            first_name = input("Enter first name: ")
-            results = self.manager.search_by_first_name(first_name)
-            PhonebookEntry.display_search_results(results)
-        elif choice == "2":
-            last_name = input("Enter last name: ")
-            results = self.manager.search_by_last_name(last_name)
-            PhonebookEntry.display_search_results(results)
-        elif choice == "3":
-            full_name = input("Enter full name: ")
-            results = self.manager.search_by_full_name(full_name)
-            PhonebookEntry.display_search_results(results)
-        elif choice == "4":
-            phone_number = input("Enter phone number: ")
-            results = self.manager.search_by_phone_number(phone_number)
-            PhonebookEntry.display_search_results(results)
-        elif choice == "5":
-            city_or_state = input("Enter city or state: ")
-            results = self.manager.search_by_city_or_state(city_or_state)
+        print(self.SEARCHING)
+        field = input("Enter your entry: ")
+        if field in self.FIELDS:
+            value = input(f"Enter value for {field}: ")
+            results = self.manager.search(f'{field}', value)
             PhonebookEntry.display_search_results(results)
         else:
-            print("Invalid choice.")
+            print("Invalid entry")
+
 
     def delete_entry(self):
         phone_number = input("Enter phone number: ")
@@ -75,7 +58,7 @@ class Phonebook:
 
     def update_entry(self):
         phone_number = input("Enter phone number: ")
-        results = self.manager.search_by_phone_number(phone_number)
+        results = self.manager.search('phone_number', phone_number)
         if results:
             entry_dict = results[0]
             entry = PhonebookEntry(**entry_dict)
@@ -90,12 +73,7 @@ class Phonebook:
 
     def run(self):
         while True:
-            print("Phonebook options:")
-            print("1. Add new entry")
-            print("2. Search entries")
-            print("3. Delete an entry")
-            print("4. Update an entry")
-            print("5. Exit")
+            print(self.GREETINGS)
             choice = input("Enter your choice (1-5): ")
             if choice == "1":
                 self.add_entry()
