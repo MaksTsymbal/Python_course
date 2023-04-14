@@ -11,10 +11,13 @@ from phonebook_manager import PhonebookManager
 def dict_to_list(d):
     return list(d.values())
 
+
 class Phonebook:
+
     GREETINGS = "Phonebook options:\n1. Add new entry\n2. Search entries\n3. Delete an entry\n4. Update an entry\n5. Exit"
     SEARCHING = "Search entries:\n1. By first_name\n2. By last_name\n3. By full_name\n4. By phone_number\n5. By city or state"
     FIELDS = list(('first_name', 'last_name', 'phone_number', 'city', 'state'))
+
     def __init__(self, name):
         self.name = name
         self.data = self.load_data()

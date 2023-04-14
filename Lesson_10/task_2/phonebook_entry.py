@@ -11,13 +11,7 @@ class PhonebookEntry:
         self.state = state
 
     def to_dict(self):
-        return {
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "phone_number": self.phone_number,
-            "city": self.city,
-            "state": self.state
-        }
+        return self.__dict__
 
     def display(self):
         print(f"{self.first_name} {self.last_name}")
