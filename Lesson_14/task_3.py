@@ -27,28 +27,28 @@ class Fraction:
 
     def __add__(self, other):
         if not isinstance(other, Fraction):
-            other = Fraction(other)
+            raise TypeError("Cannot add a Fraction with a non-Fraction type")
         numerator = self.numerator * other.denominator + self.denominator * other.numerator
         denominator = self.denominator * other.denominator
         return Fraction(numerator, denominator).reduce()
 
     def __sub__(self, other):
         if not isinstance(other, Fraction):
-            other = Fraction(other)
+            raise TypeError("Cannot subtract a non-Fraction type from a Fraction")
         numerator = self.numerator * other.denominator - self.denominator * other.numerator
         denominator = self.denominator * other.denominator
         return Fraction(numerator, denominator).reduce()
 
     def __mul__(self, other):
         if not isinstance(other, Fraction):
-            other = Fraction(other)
+            raise TypeError("Cannot multiply a Fraction with a non-Fraction type")
         numerator = self.numerator * other.numerator
         denominator = self.denominator * other.denominator
         return Fraction(numerator, denominator).reduce()
 
     def __truediv__(self, other):
         if not isinstance(other, Fraction):
-            other = Fraction(other)
+            raise TypeError("Cannot divide a Fraction by a non-Fraction type")
         if other.numerator == 0:
             raise ValueError("Cannot divide by zero.")
         numerator = self.numerator * other.denominator
@@ -57,8 +57,28 @@ class Fraction:
 
     def __eq__(self, other):
         if not isinstance(other, Fraction):
-            other = Fraction(other)
+            return False
         return self.numerator == other.numerator and self.denominator == other.denominator
+
+    def __lt__(self, other):
+        if not isinstance(other, Fraction):
+            raise TypeError("Cannot compare a Fraction with a non-Fraction type")
+        return self.numerator * other.denominator < other.numerator * self.denominator
+
+    def __le__(self, other):
+        if not isinstance(other, Fraction):
+            raise TypeError("Cannot compare a Fraction with a non-Fraction type")
+        return self.numerator * other.denominator <= other.numerator * self.denominator
+
+    def __gt__(self, other):
+        if not isinstance(other, Fraction):
+            raise TypeError("Cannot compare a Fraction with a non-Fraction type")
+        return self.numerator * other.denominator > other.numerator * self.denominator
+
+    def __ge__(self, other):
+        if not isinstance(other, Fraction):
+            raise TypeError("Cannot compare a Fraction with a non-Fraction type")
+        return self.numerator * other.denominator >= other.numerator * self.denominator
 
 
 if __name__ == "__main__":
@@ -66,15 +86,22 @@ if __name__ == "__main__":
     y = Fraction(1, 4)
 
     z = x + y
-    print(z)  # print "6/8"
+    print(z)  # print "3/4"
 
     z = x - y
-    print(z)  # print "2/8"
+    print(z)  # print "1/4"
 
     z = x * y
     print(z)  # print "1/8"
 
     z = x / y
-    print(z)  # print "4/2"
+    print(z)  # print "2/1"
 
     print(x + y == Fraction(3, 4))  # must be True
+    print(x == y) # must be False
+    print(x > y)  # must be True
+    print(x < y)  # must be False
+    print(x >= y)  # must be True
+    print(x <= y)  # must be False
+
+
