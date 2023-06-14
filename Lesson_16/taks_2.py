@@ -7,7 +7,6 @@ def in_range(start, end, step=1):
         yield current
         current += step
 
-
 for i in in_range(0, 10, 2):
     print(i)
 

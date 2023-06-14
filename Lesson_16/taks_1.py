@@ -3,10 +3,13 @@
 # the enumerate function
 
 def with_index(iterable, start=0):
-    for i, item in enumerate(iterable, start=start):
-        yield i, item
+    index = start
+    for item in iterable:
+        yield index, item
+        index += 1
 
 my_list = ['apple', 'banana', 'cherry', 'Maksik']
 for index, value in with_index(my_list):
     print(f'{index}: {value}')
+
 
