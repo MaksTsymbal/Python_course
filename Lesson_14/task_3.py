@@ -22,9 +22,6 @@ class Fraction:
     def __repr__(self):
         return f"{self.numerator}/{self.denominator}"
 
-    def __str__(self):
-        return f"{self.numerator}/{self.denominator}"
-
     def __add__(self, other):
         if not isinstance(other, Fraction):
             raise TypeError("Cannot add a Fraction with a non-Fraction type")
@@ -79,6 +76,16 @@ class Fraction:
         if not isinstance(other, Fraction):
             raise TypeError("Cannot compare a Fraction with a non-Fraction type")
         return self.numerator * other.denominator >= other.numerator * self.denominator
+
+    def __str__(self):
+        whole_part = self.numerator // self.denominator
+        numerator = self.numerator % self.denominator
+        if whole_part == 0:
+            return f"{numerator}/{self.denominator}"
+        elif numerator == 0:
+            return str(whole_part)
+        else:
+            return f"{whole_part} {numerator}/{self.denominator}"
 
 
 if __name__ == "__main__":

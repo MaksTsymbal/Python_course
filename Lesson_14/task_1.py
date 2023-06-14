@@ -4,7 +4,11 @@
 # Also, create a simple generic function, which takes as input instance of a Cat or Dog classes
 # and performs talk method on input parameter.
 
-class Animal:
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+    @abstractmethod
     def talk(self):
         pass
 
@@ -29,6 +33,7 @@ def some_animal_talk(animal):
 
 some_animal_talk(cat)
 some_animal_talk(dog)
+
 
 
 

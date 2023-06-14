@@ -20,6 +20,7 @@ class Library:
     def new_book(self, name, year, author):
         book = Book(name, year, author)
         self.books.append(book)
+        self.authors.append(author)  # Додано автора до self.authors
         author.books.append(book)
         return book
 
